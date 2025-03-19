@@ -9,15 +9,16 @@ import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import { Colors } from "../reusableComponent/styles";
 import "../profile/Profile.css";
 
-// ✅ Dynamic Imports (SSR Disabled)
-const EditPersonalInfo = dynamic(
-  () => import("./component/edit_personal_info"),
-  { ssr: false }
-);
+// Static import for Sidebar for better performance
+import Sidebar from "../sidebar/page";
+
+// ✅ Dynamic Imports for Components that are needed on demand
+const EditPersonalInfo = dynamic(() => import("./component/edit_personal_info"), {
+  ssr: false,
+});
 const ContactInfo = dynamic(() => import("./component/contact_info"), {
   ssr: false,
 });
-const Sidebar = dynamic(() => import("../sidebar/page"), { ssr: false });
 
 function Editprofile() {
   const useColors = Colors(); // Declare useColors once
@@ -51,10 +52,7 @@ function Editprofile() {
           <div className="row mt-3">
             <div className="col-12">
               <Link className="unselectcolor para2" href="/profile" passHref>
-                <ArrowBackOutlinedIcon
-                  className="me-1"
-                  sx={{ fontSize: "25px" }}
-                />{" "}
+                <ArrowBackOutlinedIcon className="me-1" sx={{ fontSize: "25px" }} />{" "}
                 Back
               </Link>
             </div>
@@ -66,9 +64,7 @@ function Editprofile() {
                 onClick={() => setSelectedTab("personal")}
                 style={{
                   backgroundColor:
-                    selectedTab === "personal"
-                      ? useColors.themeRed
-                      : "transparent",
+                    selectedTab === "personal" ? useColors.themeRed : "transparent",
                   color: selectedTab === "personal" ? "#fff" : "#6d6777",
                   borderRadius: "5px",
                   transition: "0.3s",
@@ -84,9 +80,7 @@ function Editprofile() {
                 onClick={() => setSelectedTab("contact")}
                 style={{
                   backgroundColor:
-                    selectedTab === "contact"
-                      ? useColors.themeRed
-                      : "transparent",
+                    selectedTab === "contact" ? useColors.themeRed : "transparent",
                   color: selectedTab === "contact" ? "#fff" : "#6d6777",
                   borderRadius: "5px",
                   transition: "0.3s",

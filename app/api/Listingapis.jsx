@@ -32,3 +32,23 @@ export const getEmployeeHiringDetailsByBunit = async (Bunit,type) => {
       throw error; 
     }
   };
+  
+  export const getEmpVacationDetails = async (EmpId) => {
+    try {
+      const response = await axiosInstance.get(`/api/dashboard/getEmpVacationDetails/${EmpId}`);
+      return response; 
+    } catch (error) {
+      console.error("Error fetching prehire details:", error);
+      throw error; 
+    }
+  };
+
+  export const getEmpImpContactDetails = async (EmpId) => {
+    try {
+      const response = await axiosInstance.get(`/api/dashboard/getEmpImpContactDetails/${EmpId}`);
+      return response; 
+    } catch (error) {
+      console.error("Error fetching prehire details:", error);
+      throw error; 
+    }
+  };

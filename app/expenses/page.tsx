@@ -11,73 +11,25 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { TimesheetDataByMonth } from "../reusableComponent/JsonData";
 
-// ⏬ Dynamic Imports (SSR Disabled)
-const Summarydetails = dynamic(
-  () => import("../timesheet/components/summarydetails"),
-  { ssr: false }
-);
-const Timesheetaproover = dynamic(
-  () =>
-    import("../timesheet/components/listofholidays").then(
-      (mod) => mod.Timesheetaproover
-    ),
-  { ssr: false }
-);
-const Uploadfiles = dynamic(
-  () => import("../timesheet/components/uploadfiles"),
-  { ssr: false }
-);
-const Viewfiles = dynamic(
-  () =>
-    import("../timesheet/components/uploadfiles").then((mod) => mod.Viewfiles),
-  { ssr: false }
-);
-const Totalsummarycards = dynamic(
-  () =>
-    import("../timesheet/components/totalsummarydetails").then(
-      (mod) => mod.Totalsummarycards
-    ),
-  { ssr: false }
-);
-const Summaryheetcalendar = dynamic(
-  () => import("./components/expensecsheetcalendar"),
-  { ssr: false }
-);
-const Expensestotalsummary = dynamic(
-  () =>
-    import("./components/expensesaprroverandtotal").then(
-      (mod) => mod.Expensestotalsummary
-    ),
-  { ssr: false }
-);
-const TimesheetExpenceAndHoursField = dynamic(
-  () =>
-    import("../reusableComponent/timesheetexpenceandhoursfield").then(
-      (mod) => mod.TimesheetExpenceAndHoursField
-    ),
-  { ssr: false }
-);
+// Static Import for frequently used components
+import Sidebar from "../sidebar/page";
+import Summarydetails from "../timesheet/components/summarydetails";
+import { Expensestotalsummary } from "./components/expensesaprroverandtotal";
+
+
+// ⏬ Dynamic Imports (Only for components not used globally)
+const Timesheetaproover = dynamic(() => import("../timesheet/components/listofholidays"), { ssr: false });
+const Uploadfiles = dynamic(() => import("../timesheet/components/uploadfiles"), { ssr: false });
+const Viewfiles = dynamic(() => import("../timesheet/components/uploadfiles").then(mod => mod.Viewfiles), { ssr: false });
+const Totalsummarycards = dynamic(() => import("../timesheet/components/totalsummarydetails").then(mod => mod.Totalsummarycards), { ssr: false });
+const Summaryheetcalendar = dynamic(() => import("./components/expensecsheetcalendar"), { ssr: false });
+const TimesheetExpenceAndHoursField = dynamic(() => import("../reusableComponent/timesheetexpenceandhoursfield").then(mod => mod.TimesheetExpenceAndHoursField), { ssr: false });
 
 // Dynamic Calendar Imports
-const MonthlyCalendar = dynamic(
-  () => import("../reusableComponent/calendar/monthlyCalendar"),
-  { ssr: false }
-);
-const WeeklyCalendar = dynamic(
-  () => import("../reusableComponent/calendar/weeklycalendar"),
-  { ssr: false }
-);
-const SemiMonthlyCalendar = dynamic(
-  () => import("../reusableComponent/calendar/semimonthlyCalendar"),
-  { ssr: false }
-);
-const BiWeeklyCalendar = dynamic(
-  () => import("../reusableComponent/calendar/biweeklycalendar"),
-  { ssr: false }
-);
-const Sidebar = dynamic(() => import("../sidebar/page"), {
-  ssr: false,
-});
+const MonthlyCalendar = dynamic(() => import("../reusableComponent/calendar/monthlyCalendar"), { ssr: false });
+const WeeklyCalendar = dynamic(() => import("../reusableComponent/calendar/weeklycalendar"), { ssr: false });
+const SemiMonthlyCalendar = dynamic(() => import("../reusableComponent/calendar/semimonthlyCalendar"), { ssr: false });
+const BiWeeklyCalendar = dynamic(() => import("../reusableComponent/calendar/biweeklycalendar"), { ssr: false });
 
 export default function Expenses({ weekListDatas }: any) {
   const useColors = Colors();
@@ -99,27 +51,16 @@ export default function Expenses({ weekListDatas }: any) {
   }, []);
 
   const timesheetDataConvertedToFetchCalendar = timesheetList.flat();
+  const codeItems = timesheetDataConvertedToFetchCalendar?.filter((item: any) => item.codeId && item.codeLabel);
+  const timesheetItems = timesheetDataConvertedToFetchCalendar?.filter((item: any) => item.codeId && item.day);
 
-  // Filter for objects with codeId and codeLabel
-  const codeItems = timesheetDataConvertedToFetchCalendar?.filter(
-    (item: any) => item.codeId && item.codeLabel
-  );
-  const timesheetItems = timesheetDataConvertedToFetchCalendar?.filter(
-    (item: any) => item.codeId && item.day
-  );
-
-  // Merge data by matching codeId
-  const ConvertedTimeSheetForCalendar = timesheetItems?.map(
-    (timesheetItem: any) => {
-      const code = codeItems?.find(
-        (codeItem: any) => codeItem.codeId === timesheetItem.codeId
-      );
-      return {
-        ...timesheetItem,
-        codeLabel: code ? code.codeLabel : "",
-      };
-    }
-  );
+  const ConvertedTimeSheetForCalendar = timesheetItems?.map((timesheetItem: any) => {
+    const code = codeItems?.find((codeItem: any) => codeItem.codeId === timesheetItem.codeId);
+    return {
+      ...timesheetItem,
+      codeLabel: code ? code.codeLabel : "",
+    };
+  });
 
   const handleWeekList = (weeklistData: any) => {
     setgetWeeklyList(weeklistData);
@@ -185,9 +126,7 @@ export default function Expenses({ weekListDatas }: any) {
                     ) : null}
                   </div>
                   <Expensestotalsummary
-                    showsummarycards={() =>
-                      setShowSummaryCards(!showSummaryCards)
-                    }
+                    showsummarycards={() => setShowSummaryCards(!showSummaryCards)}
                   />
                   <Summarydetails />
                 </div>

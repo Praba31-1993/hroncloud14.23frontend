@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
 import { Colors } from "@/app/reusableComponent/styles";
 import { salesTDMReport, getemployeeinformation } from "@/app/reusableComponent/JsonData";
+import Sidebar from "@/app/sidebar/page";
 
 // ✅ Dynamic imports (SSR Disabled)
 const SalesReportTable = dynamic(() => import("./componets/salesReportTable"), { ssr: false });
@@ -12,7 +13,6 @@ const EmployeeInformation = dynamic(() => import("./componets/employeeinformatio
 const FixedProject = dynamic(() => import("./componets/fixedproject"), { ssr: false });
 const InternalProject = dynamic(() => import("./componets/internalproject"), { ssr: false });
 const Commission = dynamic(() => import("./componets/commission"), { ssr: false });
-const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
 function SalesReport() {
   const useColors = Colors();
   const [salesReport, setSalesReport] = useState<any>(null);

@@ -6,19 +6,20 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { TimesheetDataByMonth, holidayList, vacationList } from "../reusableComponent/JsonData";
+import Sidebar from "../sidebar/page";
 
-const Listofholidays = dynamic(() => import("./components/listofholidays"));
-const Timesheetaproover = dynamic(() => import("./components/listofholidays").then(mod => mod.Timesheetaproover));
-const Timesheetcalendar = dynamic(() => import("./components/timesheetscalendar"));
-const Totalsummary = dynamic(() => import("./components/totalsummarydetails").then(mod => mod.Totalsummary));
-const Totalsummarycards = dynamic(() => import("./components/totalsummarydetails").then(mod => mod.Totalsummarycards));
-const Uploadfiles = dynamic(() => import("./components/uploadfiles"));
-const Viewfiles = dynamic(() => import("./components/uploadfiles").then(mod => mod.Viewfiles));
-const MonthlyCalendar = dynamic(() => import("../reusableComponent/calendar/monthlyCalendar"));
-const WeeklyCalendar = dynamic(() => import("../reusableComponent/calendar/weeklycalendar"));
-const SemiMonthlyCalendar = dynamic(() => import("../reusableComponent/calendar/semimonthlyCalendar"));
-const BiWeeklyCalendar = dynamic(() => import("../reusableComponent/calendar/biweeklycalendar"));
-const Sidebar = dynamic(() => import("../sidebar/page"), { ssr: false });
+// Dynamic Imports with ssr: false for client-side rendering only
+const Listofholidays = dynamic(() => import("./components/listofholidays"), { ssr: false });
+const Timesheetaproover = dynamic(() => import("./components/listofholidays").then(mod => mod.Timesheetaproover), { ssr: false });
+const Timesheetcalendar = dynamic(() => import("./components/timesheetscalendar"), { ssr: false });
+const Totalsummary = dynamic(() => import("./components/totalsummarydetails").then(mod => mod.Totalsummary), { ssr: false });
+const Totalsummarycards = dynamic(() => import("./components/totalsummarydetails").then(mod => mod.Totalsummarycards), { ssr: false });
+const Uploadfiles = dynamic(() => import("./components/uploadfiles"), { ssr: false });
+const Viewfiles = dynamic(() => import("./components/uploadfiles").then(mod => mod.Viewfiles), { ssr: false });
+const MonthlyCalendar = dynamic(() => import("../reusableComponent/calendar/monthlyCalendar"), { ssr: false });
+const WeeklyCalendar = dynamic(() => import("../reusableComponent/calendar/weeklycalendar"), { ssr: false });
+const SemiMonthlyCalendar = dynamic(() => import("../reusableComponent/calendar/semimonthlyCalendar"), { ssr: false });
+const BiWeeklyCalendar = dynamic(() => import("../reusableComponent/calendar/biweeklycalendar"), { ssr: false });
 
 export default function Timesheet() {
   const [showSummaryCards, setShowSummaryCards] = useState(false);

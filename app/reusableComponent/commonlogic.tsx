@@ -1,5 +1,5 @@
 import * as XLSX from "xlsx";
-// import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 
 export const SearchLogic = (arr: any[], search: string) => {
   if (!search.trim()) return arr;
@@ -39,9 +39,13 @@ export const handleCSVExport = (headers: string[], data: any[]) => {
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
     link.setAttribute("download", "export.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const staticvalue ="1"
+    if(staticvalue == "1"){
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    
   }
 };
 
@@ -64,13 +68,17 @@ export const handleCSVExport1 = (headers: any, data: any[]) => {
 
   // Create and trigger CSV download
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const link = document.createElement("a");
-  const url = URL.createObjectURL(blob);
-  link.setAttribute("href", url);
-  link.setAttribute("download", "export.csv");
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const staticvalue ="1"
+  if(staticvalue == "1"){
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "export.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+  
 };
 
 // Print Logic
@@ -105,7 +113,11 @@ export const handlePrint = () => {
             </body>
           </html>
         `);
-
+        const staticvalue ="1"
+        if(staticvalue == "1"){
+          printWindow.document.close();
+        }
+        
         printWindow.document.close();
 
         printWindow.onload = () => {
@@ -147,5 +159,5 @@ export const handleExcelExport = (headers: any, data: any[]) => {
   const fileData = new Blob([excelBuffer], {
     type: "application/octet-stream",
   });
-  // saveAs(fileData, "Compensation_History.xlsx");
+  saveAs(fileData, "Compensation_History.xlsx");
 };

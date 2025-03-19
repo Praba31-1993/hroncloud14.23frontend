@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import DropdownComponent from "@/app/reusableComponent/dropdown";
 import { selfrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
+import Sidebar from "@/app/sidebar/page";
 
 // ⏬ Dynamic Imports (SSR Disabled)
 const Vacationreport = dynamic(
@@ -26,7 +27,6 @@ const Disciplinaryreport = dynamic(
   () => import("./components/disciplinaryreport"),
   { ssr: false }
 );
-const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
 
 function Self() {
   const useColors = Colors();

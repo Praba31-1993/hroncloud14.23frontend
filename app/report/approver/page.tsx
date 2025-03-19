@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { approverrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
+import Sidebar from "@/app/sidebar/page";
+import DropdownComponent from "@/app/reusableComponent/dropdown";
 
 // ⏬ Dynamic Imports (SSR Disabled for Client-Only Components)
-const DropdownComponent = dynamic(() => import("@/app/reusableComponent/dropdown"), { ssr: false });
 const Punchinoutapprover = dynamic(() => import("./components/punchinoutapprover"), { ssr: false });
-const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
+// Static Import for frequently used components
+
 
 function Approver() {
   const useColors = Colors();

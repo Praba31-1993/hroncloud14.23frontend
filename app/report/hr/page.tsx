@@ -3,10 +3,11 @@ import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
 import { hrrepots } from "../../reusableComponent/JsonData";
 import { Colors } from "@/app/reusableComponent/styles";
+import Sidebar from "@/app/sidebar/page";
+import DropdownComponent from "@/app/reusableComponent/dropdown";
 
 // ❌ Sidebar and DropdownComponent might be using `document`, so disable SSR
-const Sidebar = dynamic(() => import("@/app/sidebar/page"), { ssr: false });
-const DropdownComponent = dynamic(() => import("@/app/reusableComponent/dropdown"), { ssr: false });
+
 const Comp_history = dynamic(() => import("./components/comp_history"), { ssr: false });
 
 function Hr_report() {

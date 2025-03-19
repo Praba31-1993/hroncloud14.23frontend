@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "../profile/Profile.css";
 
-// ❌ Sidebar & other components might be using `document`, so disable SSR
-const Sidebar = dynamic(() => import("../sidebar/page"), { ssr: false });
+// Static Import for frequently used components
+import Sidebar from "../sidebar/page";
 const Profile_update = dynamic(() => import("./component/profile_update"), {
   ssr: false,
 });

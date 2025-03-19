@@ -1,33 +1,41 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import dynamic from "next/dynamic";
-import DropdownComponent from "../reusableComponent/dropdown";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { Colors } from "@/app/reusableComponent/styles";
+import Sidebar from "../sidebar/page"; // Keep SSR if possible
+import DropdownComponent from "../reusableComponent/dropdown"; // Keep SSR if possible
 
-// Dynamic imports for better performance
-const CreateProject = dynamic(() => import("./components/createProject"), {
-  loading: () => <p>Loading...</p>, // Optional loading state
-  ssr: false, // Disable server-side rendering if needed
-});
-const ProjectHistory = dynamic(() => import("./components/projecthistory"), {
-  loading: () => <p>Loading...</p>,
+// Dynamically load components only when needed
+const CreateProject = dynamic(() => import("./components/createProject"), { 
   ssr: false,
+  loading: () => <p>Loading...</p> 
 });
- const Sidebar = dynamic(() => import("../sidebar/page"), {
-    ssr: false,
-  });
+const ProjectHistory = dynamic(() => import("./components/projecthistory"), { 
+  ssr: false,
+  loading: () => <p>Loading...</p> 
+});
 
 function ProjectStatus() {
   const [selectedTab, setSelectedTab] = useState<string>("New Project");
+  const [selectedComponent, setSelectedComponent] = useState<JSX.Element | null>(null); // New state to manage selected component
   const role: string = useSelector((state: RootState) => state.role.role);
-  const useColors = Colors();
 
   const tabs = [
     { id: 1, label: "New Project" },
     { id: 2, label: "Project History" },
   ];
+
+  // UseEffect to manage component rendering based on selected tab
+  useEffect(() => {
+    console.log("selectedTab",selectedTab)
+    // Based on the selected tab, update the selectedComponent state
+    if (selectedTab === "New Project") {
+      setSelectedComponent(<CreateProject />);
+    } else {
+      setSelectedComponent(<ProjectHistory />);
+    }
+  }, [selectedTab]); // Runs when selectedTab changes
 
   return (
     <div>
@@ -42,14 +50,15 @@ function ProjectStatus() {
               <DropdownComponent
                 dropdownlist={tabs}
                 selectedDatafunction={(data: string) => setSelectedTab(data)}
-                color={useColors.themeRed}
               />
             </div>
           </div>
         </div>
 
-        {/* Dynamic component rendering */}
-        {selectedTab === "New Project" ? <CreateProject /> : <ProjectHistory />}
+        {/* Wrap in Suspense for smoother loading */}
+        <Suspense fallback={<p>Loading project...</p>}>
+          {selectedComponent} {/* Render the component based on selectedTab */}
+        </Suspense>
       </Sidebar>
     </div>
   );

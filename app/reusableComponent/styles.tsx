@@ -10,10 +10,24 @@ type TextStylesType = {
 };
 
 export const Colors = () => {
-  const selectedColor = useSelector((state: RootState) => state.color.color);
-  const selectedborder = useSelector((state: RootState) => state.color.border);
-  const selectedshadow = useSelector((state: RootState) => state.color.shadow);
+  if (typeof window === "undefined") {
+    return {
+      themeRed: "#FF6363", // Default fallback values for SSR
+      buttonsFill: "#FF6363",
+      headerText: "#6D6777",
+      normalText: "#A8A8A8",
+      darkThemeMode: "#282C34",
+      white: "#FFFFFF",
+      grey: "#F4F4F4",
+      iconGray: "#E4E4E4",
+      border: "#ccc",
+      boxshadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+    };
+  }
 
+  const selectedColor = useSelector((state: RootState) => state.color.color);
+  const selectedBorder = useSelector((state: RootState) => state.color.border);
+  const selectedShadow = useSelector((state: RootState) => state.color.shadow);
 
   return {
     themeRed: selectedColor,
@@ -24,10 +38,11 @@ export const Colors = () => {
     white: "#FFFFFF",
     grey: "#F4F4F4",
     iconGray: "#E4E4E4",
-    border: selectedborder ,
-    boxshadow: selectedshadow,
+    border: selectedBorder,
+    boxshadow: selectedShadow,
   };
 };
+
 
 export const TextStyles: TextStylesType = {
   headerTextSize: "14px",

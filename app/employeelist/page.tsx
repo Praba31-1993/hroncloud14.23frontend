@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { SearchLogic } from "../reusableComponent/commonlogic";
 import { employeeListData } from "../reusableComponent/JsonData";
 import WorkIcon from "@mui/icons-material/Work";
+import Sidebar from "../sidebar/page";
 
 export interface Employee {
   employeeId: string;
@@ -33,7 +34,7 @@ function EmployeeList() {
     ssr: false,
   });
 
-  const Sidebar = dynamic(() => import("../sidebar/page"), { ssr: false });
+
   const tabs = [
     { id: 1, label: "Select Department" },
     { id: 2, label: "Super Admin" },
