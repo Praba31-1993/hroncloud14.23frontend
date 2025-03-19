@@ -1,4 +1,5 @@
 import { axiosInstance } from "./axiosInstance";
+import axios from "axios"
 
 export const getEmployeeHiringDetailsByBunit = async (Bunit,type) => {
     try {
@@ -49,6 +50,18 @@ export const getEmployeeHiringDetailsByBunit = async (Bunit,type) => {
       return response; 
     } catch (error) {
       console.error("Error fetching prehire details:", error);
+      throw error; 
+    }
+  };
+
+  // chatbot- http://127.0.0.1:8000/ask
+
+  export const chatbotapi = async (text) => {
+    try {
+      const response = await axios.post(`http://127.0.0.1:8000/ask`, { "text" :text});
+      return response.data; // Returning only the relevant data
+    } catch (error) {
+      console.error("Error fetching chatbot response:", error);
       throw error; 
     }
   };

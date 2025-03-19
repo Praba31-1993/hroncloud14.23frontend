@@ -1,27 +1,70 @@
-"use client";
+"use client"
+import React, { useState } from "react";
+import "./Chatbot.css"; // Import chatbot styles
+import { chatbotapi } from "../api/Listingapis";
 
-const About = () => {
-  const cards = Array(6).fill(0); // Change the number to print more cards
+const Chatbot = () => {
+  const [messages, setMessages] = useState<{ sender: string; text: string }[]>([]);
+  const [input, setInput] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const sendMessage = async () => {
+    if (!input.trim()) return;
+
+    const newMessage = { sender: "user", text: input };
+    setMessages([...messages, newMessage]);
+    setInput("");
+
+    setTimeout(() => {
+      const botReply = { sender: "bot", text: "Hello! How can I assist you today?" };
+      setMessages((prevMessages) => [...prevMessages, botReply]);
+    }, 1000);
+  };
+
+  console.log('inots',input);
+  
 
   return (
-    <div className="flex flex-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-      {cards.map((_, index) => (
-        <a
-          key={index}
-          href="#"
-          className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Noteworthy technology acquisitions 2021
-          </h5>
-          <p className="font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-        </a>
-      ))}
+    <div className="chatbot-container">
+      {/* Floating chat button */}
+      {!isOpen && (
+        <button className="chat-toggle-btn" onClick={() => setIsOpen(true)}>
+          💬
+        </button>
+      )}
+
+      {/* Chat window */}
+      {isOpen && (
+        <div className="chatbox">
+          <div className="chat-header">
+            Chatbot
+            <button className="close-btn" onClick={() => setIsOpen(false)}>✖</button>
+          </div>
+          <div className="chat-body">
+            {messages.map((msg, index) => (
+              <div key={index} className={`message ${msg.sender}`}>
+                {msg.sender === "bot" && <img src="/bot-avatar.png" alt="Bot" className="avatar" />}
+                <span className="message-text">{msg.text}</span>
+                {msg.sender === "user" && <img src="/user-avatar.png" alt="User" className="avatar" />}
+              </div>
+            ))}
+          </div>
+          <div className="chat-footer">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            />
+            <button className="send-btn" onClick={sendMessage}>
+              Send
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default About;
+export default Chatbot;
