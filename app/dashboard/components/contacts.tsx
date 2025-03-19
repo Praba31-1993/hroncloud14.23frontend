@@ -23,7 +23,7 @@ export default function Contacts({ show, close }: any) {
     const [importantContact, setImportantContact] = useState<any[]>([]);
 
     useEffect(() => {
-        const rememberedUser = localStorage.getItem("rememberedUserId");
+        const rememberedUser = localStorage.getItem("empId");
         let userId: string | null = null;
 
         try {

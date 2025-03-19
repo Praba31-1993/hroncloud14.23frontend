@@ -120,6 +120,10 @@ export default function Login() {
         if (typeof window !== "undefined") {
           localStorage.setItem("token", loginResponse.payload.token);
           localStorage.setItem(
+            "empId",
+            loginResponse.payload.userInfo.empId.toLowerCase()
+          );
+          localStorage.setItem(
             "Firstname",
             loginResponse.payload.userInfo.firstName
           );
