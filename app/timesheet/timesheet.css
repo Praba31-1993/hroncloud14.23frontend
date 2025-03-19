@@ -1,0 +1,142 @@
+
+.round {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ff6363;
+}
+
+.vacantionround {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ee37ff;
+}
+
+.approverlist img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.roles h5 {
+  color: #6d6777;
+}
+
+.summary {
+  border-bottom: 1px solid #8d8d8d4f;
+}
+
+.summarydetailscards {
+  width: fit-content ;
+  padding: 15px;
+}
+
+.summarydetailscards,
+.summarydetails {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.dark 
+.summarydetails {
+  border-radius: 10px;
+  background: #312D4B  ;
+  box-shadow: 2px 2px 4px 2px rgba(40, 39, 39, 0.393);
+}
+
+.summarydetailscards h5,
+.summarydetails h5 {
+  font-size: 15px;
+  font-family: Inter, sans-serif;
+}
+
+/* .summarydetailscards svg,
+.summarydetails svg {
+  color: white;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: #ff6363;
+  border-radius: 50%;
+} */
+
+.summarydetailscards .icons,
+.summarydetails .icons {
+  color: white;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: #ff6363;
+  border-radius: 50%;
+}
+
+.totalweeks th:nth-last-child(1) {
+  color: #ff6363 !important;
+  border-bottom: 1px solid var(--stroke, #dadce000);
+}
+
+.totalweeks th:nth-child(1) {
+  border-bottom: 1px solid var(--stroke, #dadce000);
+}
+
+.totalweeks th {
+  border-bottom: 1px solid var(--stroke, #dadce0);
+  padding-bottom: 2px;
+  text-align: center;
+}
+
+.timesheetlist {
+  background-color: #fff;
+  border: 1px solid var(--Timesheet-holiday, #ede4ff);
+  background: #fcfcfc;
+}
+
+.dark .timesheetlist {
+  background-color: #312D4B  !important;
+  border: 1px solid var(--Timesheet-holiday, #333233);
+  background: #fcfcfc;
+}
+
+.projectlist {
+  color: #8c57ff;
+  font-weight: 500;
+  width: fit-content;
+  outline: 0 !important;
+}
+
+.inputfield input {
+  width: 100%;
+  outline: 0 !important;
+  border-radius: 5px;
+  border: 0.5px solid #c8c8c8 !important;
+}
+
+.inputdats:nth-child(6) input,
+.inputdats:nth-child(7) input {
+  background: var(--Timesheet-weekend, #fff2d7) !important;
+}
+
+.holiday .inputdats input {
+  background: var(--Timesheet-holiday, #ede4ff) !important;
+}
+
+.dark .inputfield input {
+  width: 100%;
+  outline: 0 !important;
+  border-radius: 5px;
+  border: 0.5px solid #c8c8c8 !important;
+}
+
+.dark .holiday .inputdats input {
+  background: var(--Timesheet-holiday, #ede4ff) !important;
+}
+.timesheetentrytable{
+  height: 33vw;
+  overflow: auto;
+}
+

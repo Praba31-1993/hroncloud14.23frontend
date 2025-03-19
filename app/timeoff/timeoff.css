@@ -1,0 +1,15 @@
+.dayType {
+  background: white;
+  height: fit-content;
+}
+
+.columnListCard {
+  padding: 10px;
+  position: absolute;
+  top: 19em;
+  width: 15%;
+  z-index: 1;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  overflow-y: auto;
+  height: 20%;
+}
